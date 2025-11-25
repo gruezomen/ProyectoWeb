@@ -6,6 +6,7 @@ const categoriasRoutes = require('./src/routes/categorias');
 const subcategoriasRoutes = require('./src/routes/subcategorias');
 const nivelesRoutes = require('./src/routes/nivelesDificultad');
 const rangosRoutes = require('./src/routes/rangosEdad');
+const preguntasRoutes = require('./src/routes/preguntas');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/categorias', categoriasRoutes);
 app.use('/api/subcategorias', subcategoriasRoutes);
 app.use('/api/niveles-dificultad', nivelesRoutes);
 app.use('/api/rangos-edad', rangosRoutes);
+app.use('/api/preguntas', preguntasRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
