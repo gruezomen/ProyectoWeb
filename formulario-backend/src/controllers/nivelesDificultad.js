@@ -1,4 +1,5 @@
 const NivelDificultad = require('../models/nivelDificultad');
+const { validationResult } = require('express-validator');
 
 exports.obtenerNiveles = async (req, res) => {
   try {
@@ -20,6 +21,11 @@ exports.obtenerNivelPorId = async (req, res) => {
 };
 
 exports.crearNivel = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const nuevo = await NivelDificultad.create(req.body);
     res.status(201).json(nuevo);
@@ -29,6 +35,11 @@ exports.crearNivel = async (req, res) => {
 };
 
 exports.actualizarNivel = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const nivel = await NivelDificultad.findByIdAndUpdate(
       req.params.id,

@@ -1,4 +1,5 @@
 const Subcategoria = require('../models/subcategoria');
+const { validationResult } = require('express-validator');
 
 exports.obtenerSubcategorias = async (req, res) => {
   try {
@@ -24,6 +25,11 @@ exports.obtenerSubcategoriaPorId = async (req, res) => {
 };
 
 exports.crearSubcategoria = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const nueva = await Subcategoria.create(req.body);
     res.status(201).json(nueva);
@@ -33,6 +39,11 @@ exports.crearSubcategoria = async (req, res) => {
 };
 
 exports.actualizarSubcategoria = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const subcategoria = await Subcategoria.findByIdAndUpdate(
       req.params.id,

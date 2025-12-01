@@ -1,4 +1,5 @@
 const Categoria = require('../models/categoria');
+const { validationResult } = require('express-validator');
 
 // GET /api/categorias
 exports.obtenerCategorias = async (req, res) => {
@@ -23,6 +24,11 @@ exports.obtenerCategoriaPorId = async (req, res) => {
 
 // POST /api/categorias
 exports.crearCategoria = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const nueva = await Categoria.create(req.body);
     res.status(201).json(nueva);
@@ -33,6 +39,11 @@ exports.crearCategoria = async (req, res) => {
 
 // PUT /api/categorias/:id
 exports.actualizarCategoria = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const categoria = await Categoria.findByIdAndUpdate(
       req.params.id,
