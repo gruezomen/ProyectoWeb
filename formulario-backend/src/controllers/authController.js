@@ -37,19 +37,8 @@ exports.registro = async (req, res) => {
 
     await nuevoUsuario.save();
 
-    // Crear token
-    const token = generarToken(nuevoUsuario._id);
-
     res.status(201).json({
-      mensaje: 'Usuario creado',
-      token,
-      usuario: {
-        id: nuevoUsuario._id,
-        nombre: nuevoUsuario.nombre,
-        apellido: nuevoUsuario.apellido,
-        email: nuevoUsuario.email,
-        rol: nuevoUsuario.rol
-      }
+      mensaje: 'Usuario registrado correctamente. Su cuenta está pendiente de aprobación por un administrador.',
     });
   } catch (err) {
     console.error(err);
@@ -66,6 +55,14 @@ exports.login = async (req, res) => {
     const usuario = await Usuario.findOne({ email });
     if (!usuario) {
       return res.status(401).json({ error: 'Email o contraseña incorrectos' });
+    }
+
+    // Verificar estado del usuario
+    if (usuario.estado === 'pendiente') {
+      return res.status(403).json({ error: 'Su cuenta está pendiente de aprobación.' });
+    }
+    if (usuario.estado === 'rechazado') {
+      return res.status(403).json({ error: 'Su cuenta ha sido rechazada. Contacte al administrador.' });
     }
 
     // Verificar contraseña

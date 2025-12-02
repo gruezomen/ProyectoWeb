@@ -25,8 +25,13 @@ const usuarioSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    enum: ['estudiante', 'profesor', 'administrador'],
+    enum: ['estudiante', 'editor', 'gestor', 'administrador'],
     default: 'estudiante'
+  },
+  estado: {
+    type: String,
+    enum: ['pendiente', 'habilitado', 'rechazado'],
+    default: 'pendiente'
   },
   activo: {
     type: Boolean,

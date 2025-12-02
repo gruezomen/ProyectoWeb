@@ -56,6 +56,12 @@ const preguntaSchema = new mongoose.Schema(
 
     activa: { type: Boolean, default: true },
 
+    estado: {
+      type: String,
+      enum: ['pendiente', 'aprobada', 'rechazada'],
+      default: 'aprobada',
+    },
+
     votos_positivos: { type: Number, default: 0 },
     votos_negativos: { type: Number, default: 0 },
   },

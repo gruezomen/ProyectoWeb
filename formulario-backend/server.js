@@ -8,6 +8,8 @@ const nivelesRoutes = require('./src/routes/nivelesDificultad');
 const rangosRoutes = require('./src/routes/rangosEdad');
 const preguntasRoutes = require('./src/routes/preguntas');
 const authRoutes = require('./src/routes/auth');
+const adminRoutes = require('./src/routes/admin');
+
 const app = express();
 
 // Conectar a MongoDB
@@ -17,6 +19,7 @@ connectDB();
 app.use(express.json());
 
 // Rutas API
+app.use('/api/admin', adminRoutes);
 app.use('/api/categorias', categoriasRoutes);
 app.use('/api/subcategorias', subcategoriasRoutes);
 app.use('/api/niveles-dificultad', nivelesRoutes);

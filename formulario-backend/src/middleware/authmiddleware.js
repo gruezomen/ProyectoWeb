@@ -32,10 +32,18 @@ exports.verificarToken = async (req, res, next) => {
   }
 };
 
-// Solo profesores pueden pasar
-exports.soloProfesor = (req, res, next) => {
-  if (req.rol !== 'profesor' && req.rol !== 'administrador') {
-    return res.status(403).json({ error: 'Solo profesores' });
+// Solo editores o admins pueden pasar
+exports.soloEditor = (req, res, next) => {
+  if (req.rol !== 'editor' && req.rol !== 'administrador') {
+    return res.status(403).json({ error: 'Acceso denegado. Se requiere rol de Editor o Administrador.' });
+  }
+  next();
+};
+
+// Solo gestores o admins pueden pasar
+exports.soloGestor = (req, res, next) => {
+  if (req.rol !== 'gestor' && req.rol !== 'administrador') {
+    return res.status(403).json({ error: 'Acceso denegado. Se requiere rol de Gestor o Administrador.' });
   }
   next();
 };
@@ -43,7 +51,7 @@ exports.soloProfesor = (req, res, next) => {
 // Solo administradores pueden pasar
 exports.soloAdmin = (req, res, next) => {
   if (req.rol !== 'administrador') {
-    return res.status(403).json({ error: 'Solo administradores' });
+    return res.status(403).json({ error: 'Acceso denegado. Se requiere rol de Administrador.' });
   }
   next();
 };
