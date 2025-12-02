@@ -7,7 +7,7 @@ const subcategoriasRoutes = require('./src/routes/subcategorias');
 const nivelesRoutes = require('./src/routes/nivelesDificultad');
 const rangosRoutes = require('./src/routes/rangosEdad');
 const preguntasRoutes = require('./src/routes/preguntas');
-
+const authRoutes = require('./src/routes/auth');
 const app = express();
 
 // Conectar a MongoDB
@@ -23,6 +23,8 @@ app.use('/api/niveles-dificultad', nivelesRoutes);
 app.use('/api/rangos-edad', rangosRoutes);
 app.use('/api/preguntas', preguntasRoutes);
 
+app.use('/api/auth', authRoutes);
+
 // Ruta de prueba
 app.get('/', (req, res) => {
   console.log('!!! LA RUTA / HA SIDO ALCANZADA !!!');
@@ -36,4 +38,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+
+
 });
+
+
