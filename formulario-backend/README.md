@@ -1,5 +1,6 @@
 # Gestor de Preguntas - Backend
 
+
 Este proyecto es el backend para una aplicación de gestión de preguntas. Proporciona una API REST para manejar categorías, preguntas, niveles de dificultad, y autenticación de usuarios. El servidor está configurado para funcionar simultáneamente sobre HTTP y HTTPS/H2.
 
 ## Tecnologías Utilizadas
@@ -9,6 +10,8 @@ Este proyecto es el backend para una aplicación de gestión de preguntas. Propo
 - **Mongoose**: ODM para modelar los objetos de MongoDB.
 - **jsonwebtoken (JWT)**: Para la generación de tokens de acceso para rutas protegidas.
 - **SPDY (HTTP/2)**: Para servir la aplicación sobre HTTPS y H2.
+- **postman ****  Para probar las api
+- **OpenSSL ** para generacion de certificacion
 
 ---
 
@@ -21,6 +24,15 @@ Asegúrate de tener instalado lo siguiente en tu sistema:
 - **Node.js**: (Se recomienda v18.x o superior).
 - **MongoDB**: Una instancia local o un clúster en la nube (como MongoDB Atlas).
 - **OpenSSL**: Necesario para generar los certificados SSL. Debes descargarlo de su [página oficial](https://www.openssl.org/) e instalarlo, asegurándote de añadirlo al PATH de tu sistema para poder usar el comando `openssl` desde cualquier terminal.
+
+### 1.1 Verificar instalacion
+
+    node -v
+    npm -v
+    openssl version
+    mongod --version
+
+
 
 ### 2. Clonar el Repositorio
 ```
